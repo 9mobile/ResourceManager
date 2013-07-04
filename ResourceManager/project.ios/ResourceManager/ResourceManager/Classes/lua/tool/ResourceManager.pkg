@@ -1,0 +1,51 @@
+
+$#include "LuaResourceManager.h"
+
+class ResourceUpdateDelegate : public CCObject {
+
+    virtual void onVersionCheckCompleted(bool latest){};
+
+    virtual void onVersionUpdated(){};
+
+    virtual void onModuleUpdated(const std::string& moduleName){};
+
+    virtual void onSingleFileUpdated(const std::string& filePath){};
+    
+    virtual void onErrorOccured(const char* message){};
+    
+};
+
+class ResourceManager : public CCObject{
+   
+        
+    static ResourceManager* sharedResourceManager();
+
+    void setDelegate(ResourceUpdateDelegate* delegate);
+    ResourceUpdateDelegate* getDelegate();
+    
+    void setScriptDelegate(CCObject* scriptDelegate);
+    CCObject* getScriptDelegate();
+
+    void setRootURL(const std::string& rootUrl);
+    
+    const char* getRootURL();
+    
+    bool isVersionLatest();
+    
+    float getVersion();
+    
+    bool isDevelopMode();
+
+    void checkVersion();
+
+    void updateVersion();
+    
+    int checkModule(const std::string& moduleName);
+
+    void updateModule(const std::string& moduleName);
+
+    void stopUpdate();
+
+    const char* localizedString(const std::string& str);
+    
+};

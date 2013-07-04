@@ -1,0 +1,9 @@
+
+1、cocos2d-x的ios版应补上以下代码，否则CCUserDefault功能异常
+
+void CCUserDefault::flush()
+{
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+2、ResourceManager的scriptDelegate用到了“tolua++实现lua继承C++类”的功能
